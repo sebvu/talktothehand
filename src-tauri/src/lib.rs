@@ -7,9 +7,10 @@ fn greet(name: &str) -> String {
 // audio shit
 use rodio::{Decoder, OutputStream, Sink};
 use std::io::Cursor;
+use cpal::traits::DeviceTrait;
 
 #[tauri::command]
-fn play_audio_to_device(audio_bytes: Vec<u8>, device_name_filter: String) {
+fn play_audio_to_device(audio_bytes: Vec<u8>, device_name_filter: String) -> Result<(), String> {
     use cpal::traits::HostTrait;
 
     let host = cpal::default_host();
